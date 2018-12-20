@@ -5,9 +5,10 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server();
+        int port = 8080;
 
         SelectChannelConnector connector = new SelectChannelConnector();
-        connector.setPort(8080);
+        connector.setPort(port);
         server.addConnector(connector);
 
         WebAppContext context = new WebAppContext("webapp", "/");
@@ -18,6 +19,14 @@ public class Main {
         }
 
         server.setHandler(context);
-        server.start();
+        try {
+            server.start();
+            server.join();
+            System.out.println("jetty server started");
+            System.out.println("listening port " + port);
+        } catch (Exception e) {
+            System.out.println("jetty server error");
+            e.printStackTrace();
+        }
     }
 }
