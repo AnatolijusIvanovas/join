@@ -19,14 +19,7 @@ public class Main {
         }
 
         server.setHandler(context);
-        try {
-            server.start();
-            server.join();
-            System.out.println("jetty server started");
-            System.out.println("listening port " + port);
-        } catch (Exception e) {
-            System.out.println("jetty server error");
-            e.printStackTrace();
-        }
+        server.start();
+        server.join();
     }
 }
